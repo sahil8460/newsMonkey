@@ -31,7 +31,7 @@ export default class Navbar extends Component {
                     </div>
                     <div className="dropdown">
                         <button className="btn btn-sm btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Prefered Theme
+                            Change Theme
                         </button>
                         <div className="dropdown-menu" style={{minWidth:'100%'}} aria-labelledby="dropdownMenuButton">
                             <button className="dropdown-item btn btn-sm text-center" onClick={()=>this.props.handleState("black")}>Black</button>
