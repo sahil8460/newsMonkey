@@ -357,7 +357,7 @@ class News extends Component {
     console.log(this.props.themecolor)
     return (
       <div className='container my-3'>
-        <h2 className='text-center m-5'style={{color:`${this.props.themecolor}`}}>NewsMonkey - Top Headlines on {this.Capitalize(this.props.category)}</h2>
+        <h2 className='text-center m-5'style={{color:`${this.props.themecolor}`}}>WorldNews - Top Headlines on {this.Capitalize(this.props.category)}</h2>
         {this.state.loading && <Spinner />}
         <div className="row" style={{alignItems:"flex-start", justifyContent:"flex-start"}}>
           {!this.state.loading && this.state.articles.map((ele) => {
