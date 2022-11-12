@@ -321,7 +321,7 @@ class News extends Component {
     this.setState({ loading: true });
 
     let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.state.key}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
-    let data = await fetch(url);
+    let data = await fetch(url, { mode: 'no-cors' });
     let parsedData = await data.json();
     this.setState({ articles: parsedData.articles, loading: false })
     
@@ -330,7 +330,7 @@ class News extends Component {
   
   async fetchData(){
     let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.state.key}&page=1&pageSize=${this.props.pageSize}`;
-    let data = await fetch(url);
+    let data = await fetch(url, { mode: 'no-cors' });
     let parsedData = await data.json();
     console.log(
       'parsed data'
