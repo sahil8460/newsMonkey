@@ -16,7 +16,7 @@ class News extends Component {
       "title": "Today in History",
       "description": "Today in History \n\nToday is Tuesday, March 1, the 60th day of 2022. There are 305 days left in the year. \n\nToday’s Highlight in History: \n\nOn March 1, 1974, seven people, including former Nixon White House aides H.R. Haldeman and John D. Ehrlichman, former At…",
       "url": "https://abcnews.go.com/US/wireStory/today-history-83172198",
-      "urlToImage": "null",
+      "urlToImage": null,
       "publishedAt": "2022-03-01T05:00:32Z",
       "content": "Today in History\r\nToday is Tuesday, March 1, the 60th day of 2022. There are 305 days left in the year.\r\nTodays Highlight in History:\r\nOn March 1, 1974, seven people, including former Nixon White Hou… [+4869 chars]"
     },
@@ -323,10 +323,14 @@ class News extends Component {
 
     let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.state.key}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
     axios.get(url).then((response) => {
-      this.setState({ articles: response.data.articles, loading: false })
+      if(response && response.status && response.status === "error"){
+        this.setState({ articles: this.articles, loading: false })
+      }else{
+        this.setState({ articles: response.data.articles, loading: false, totalResults: response.totalResults })
+      }
     }).catch((error) => {
       console.log(error);
-      this.setState({articles: this.articles})
+      this.setState({articles: this.articles,  loading: false})
     });
 
     
@@ -336,10 +340,14 @@ class News extends Component {
   async fetchData(){
     let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.state.key}&page=1&pageSize=${this.props.pageSize}`;
     axios.get(url).then((response) => {
-      this.setState({ articles: response.data.articles, loading: false })
+      if(response && response.status && response.status === "error"){
+        this.setState({ articles: this.articles, loading: false })
+      }else {
+        this.setState({articles: response.data.articles, loading: false, totalResults: response.totalResults})
+      }
     }).catch((error) => {
       console.log(error);
-      this.setState({articles: this.articles})
+      this.setState({articles: this.articles, loading: false})
     });
     console.log('parsed data');
     document.title=`NewsMonkey-`+this.Capitalize(this.props.category);
