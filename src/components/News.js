@@ -350,7 +350,7 @@ class News extends Component {
       this.setState({articles: this.articles, loading: false})
     });
     console.log('parsed data');
-    document.title=`NewsMonkey-`+this.Capitalize(this.props.category);
+    document.title=`WorldNews-`+this.Capitalize(this.props.category);
   
   }
   
