@@ -3,6 +3,7 @@ import NewsItem from './NewsItem'
 import Spinner from './Spinner';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import axios from "axios";
 
 class News extends Component { 
   // articles = [
@@ -321,21 +322,20 @@ class News extends Component {
     this.setState({ loading: true });
 
     let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.state.key}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
-    let data = await fetch(url);
-    let parsedData = await data.json();
-    this.setState({ articles: parsedData.articles, loading: false })
+    axios.get(url).then((response) => {
+      this.setState({ articles: response.data.articles, loading: false })
+    });
+
     
   }
   
   
   async fetchData(){
     let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.state.key}&page=1&pageSize=${this.props.pageSize}`;
-    let data = await fetch(url);
-    let parsedData = await data.json();
-    console.log(
-      'parsed data'
-    )
-    this.setState({ articles: parsedData.articles, totalResults: parsedData.totalResults, loading: false })
+    axios.get(url).then((response) => {
+      this.setState({ articles: response.data.articles, loading: false })
+    });
+    console.log('parsed data');
     document.title=`NewsMonkey-`+this.Capitalize(this.props.category);
   
   }
